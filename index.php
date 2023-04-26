@@ -2,22 +2,24 @@
 
 require "vendor/autoload.php";
 
-
 session_start();
 session_destroy();
 
 try{
 	if(isset($_POST['fullname'])){
 		$_SESSION['user_complete name']= $POST['user_complete name'];
-		$_SESSION['user_email']= $POST['user_email'];
-		$_SESSION['user_birthdate']= $POST['user_birthdate'];
+		$_SESSION['user_email']= $POST['email'];
+		$_SESSION['user_birthdate']= $POST['birthdate'];
+
+		header('Location: quiz.php');
+		exit;
+		} else {
+			throw new Exception('Missing the basic information.');
 	}
 }catch (Exception $e){
-	error_log($e->getMessage());
+	echo '<h1>An error occurred:</h1>';
+	echo '<p> . $e->getMessage() . '</p>';
 }
-
-?>
-
 
 <!DOCTYPE html>
 <html>
